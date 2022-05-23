@@ -39,7 +39,7 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
 
 result = checkin()
 if SCKEY != '':
-    sendurl = 'https://sctapi.ftqq.com/' + SCKEY + '.send?title=虚坤粉机场签到&desp=' + result
+    sendurl = 'https://sctapi.ftqq.com/' + SCKEY + '.send?title=狗子云机场签到&desp=' + result
     r = requests.get(url=sendurl)
 if TG_USER_ID != '':
     sendurl = f'https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage?chat_id={TG_USER_ID}&text={result}&disable_web_page_preview=True'
