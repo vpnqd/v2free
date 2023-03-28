@@ -15,6 +15,7 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
     session = requests.session()
     session.get(base_url, verify=False)
     login_url = base_url + '/auth/login'
+    print("----base_url= ", base_url, ", login_url=", login_url, ", email=", email, ", password=", password, ", session=", session)
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) '
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
