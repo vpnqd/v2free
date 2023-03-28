@@ -4,18 +4,19 @@ import os
 
 requests.packages.urllib3.disable_warnings()
 SCKEY = os.environ.get('SCKEY')
-TG_BOT_TOKEN = os.environ.get('TGBOT')
-TG_USER_ID = os.environ.get('TGUSERID')
 
+print("SCKEY=", SCKEY)
 
 def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
             base_url=os.environ.get('BASE_URL'), ):
+    
+    print("email=", email, "password=", password, "base_url=", base_url)
+
     email = email.split('@')
     email = email[0] + '%40' + email[1]
     session = requests.session()
     session.get(base_url, verify=False)
     login_url = base_url + '/auth/login'
-    print("----base_url= ", base_url, ", login_url=", login_url, ", email=", email, ", password=", password, ", session=", session)
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) '
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -47,9 +48,4 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
 
 
 result = checkin()
-if SCKEY != '':
-    sendurl = 'https://sctapi.ftqq.com/' + SCKEY + '.send?title=v2free机场签到&desp=' + result
-    r = requests.get(url=sendurl)
-if TG_USER_ID != '':
-    sendurl = f'https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage?chat_id={TG_USER_ID}&text={result}&disable_web_page_preview=True'
-    r = requests.get(url=sendurl)
+print("----result= ", result)
