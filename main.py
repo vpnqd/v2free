@@ -22,8 +22,14 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     }
     post_data = 'email=' + email + '&passwd=' + password + '&code='
+
+    print("----post_data= ", post_data)
     post_data = post_data.encode()
+
+    print("----post_data= ", post_data)
     response = session.post(login_url, post_data, headers=headers, verify=False)
+
+    print("----response= ", response)
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) '
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -32,6 +38,8 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
     }
     response = session.post(base_url + '/user/checkin', headers=headers,
                             verify=False)
+            
+    print("----response= ", response)
     response = json.loads(response.text)
     print(response['msg'])
     return response['msg']
