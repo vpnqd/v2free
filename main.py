@@ -5,12 +5,8 @@ import os
 requests.packages.urllib3.disable_warnings()
 SCKEY = os.environ.get('SCKEY')
 
-print("SCKEY=", SCKEY)
-
 def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
             base_url=os.environ.get('BASE_URL'), ):
-    
-    print("email=", email, "password=", password, "base_url=", base_url)
 
     email = email.split('@')
     email = email[0] + '%40' + email[1]
@@ -25,13 +21,10 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
     }
     post_data = 'email=' + email + '&passwd=' + password + '&code='
 
-    print("----post_data= ", post_data)
     post_data = post_data.encode()
 
-    print("----post_data= ", post_data)
     response = session.post(login_url, post_data, headers=headers, verify=False)
 
-    print("----response= ", response)
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) '
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -41,11 +34,9 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
     response = session.post(base_url + '/user/checkin', headers=headers,
                             verify=False)
             
-    print("----response= ", response)
     response = json.loads(response.text)
     print(response['msg'])
     return response['msg']
 
 
 result = checkin()
-print("----result= ", result)
